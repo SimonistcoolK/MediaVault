@@ -6,7 +6,7 @@ on "Add videos here:"
 Enter:
 
 ```
-﻿<H4 class="conh">Title</H4>
+﻿<p class="conh">Title</p>
         <video width="250" height="140" controls  class="cont">
             <source src="media/videoname.mp4" type="video/mp4">
             Your browser does not support the video tag.
@@ -14,7 +14,7 @@ Enter:
 ```
 
 ```
-﻿        <H4 class="conh">Title</h4>
+﻿        <p class="conh">Title</p>
         <audio controls class="cont">
             <source src="media/audioname.mp3" type="audio/mpeg">
             Your browser does not support the audio element.

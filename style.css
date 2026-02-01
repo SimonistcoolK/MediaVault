@@ -32,6 +32,12 @@ body {
     border-radius: 1rem;
 }
 
-
-
+.content {
+    padding: 10px;
+    justify-items: center;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1rem;
+    align-content: flex-start;
+}
 
