@@ -23,6 +23,15 @@ body {
     max-width: 300px;
 }
 
+.conh {
+    background-color: #00ffff;
+    color: #0f0f0f;
+    max-width: 300px;
+    margin-left: 1rem;
+    border: #00ffff solid 2px;
+    border-radius: 1rem;
+}
+
 
 
 
