@@ -1,0 +1,28 @@
+
+body {
+    font: 1em sans-serif;
+    background-color: #0f0f0f;
+    margin: 0;
+    padding: 0;
+    }
+    
+.Welcome {
+    width: 80%;
+    margin: auto;
+    padding: 20px;
+    color: #78787d;
+    }
+
+.cont {
+    margin: auto;
+    margin-left: 2rem;
+    border-radius: 1rem;
+    border: #00ffff solid 2px;
+    color : #d3d3d3;
+    border-color: #00ffff;
+    max-width: 300px;
+}
+
+
+
+
