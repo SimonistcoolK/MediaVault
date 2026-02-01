@@ -5,7 +5,17 @@ body {
     margin: 0;
     padding: 0;
     }
-    
+
+.nav {
+    background-color: #060e0e;
+    color: #00ffff;
+    padding: 10px;
+    text-align: center;
+    font-size: 1.2em;
+    border-bottom: #00ffff solid 2px;
+    width: 100%;
+    }
+
 .Welcome {
     width: 80%;
     margin: auto;

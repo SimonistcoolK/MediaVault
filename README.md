@@ -20,6 +20,12 @@ Enter:
             Your browser does not support the audio element.
         </audio>
 ```
+
+
+```
+﻿        <p class="conh">Sample Image 1</p>
+        <img src="media/sample-image.png" alt="Sample Image 1" width="375" height="210" class="cont">
+```
 add it below "add here"!\
 I think you now how to do it!
 
