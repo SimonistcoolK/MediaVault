@@ -24,12 +24,13 @@ body {
 }
 
 .conh {
-    background-color: #00ffff;
-    color: #0f0f0f;
+    background-color: #060e0e;
+    color: #ff0606;
     max-width: 300px;
     margin-left: 1rem;
     border: #00ffff solid 2px;
     border-radius: 1rem;
+    padding: 10px;
 }
 
 .content {
