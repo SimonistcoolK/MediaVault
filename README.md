@@ -30,4 +30,5 @@ add it below "add here"!\
 I think you now how to do it!
 
 ### Good luck!
-##### Paste your media in the /media folder and add it to the HTML file
+##### you need to download your media. 
+##### Paste your "legal downloaded" media in the /media folder and add it to the HTML file
