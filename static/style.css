@@ -112,3 +112,19 @@ h4 {
     color: #00ffff;
     text-align: center;
 }
+
+.btn {
+    background-color: #00ffff;
+    color: #060e0e;
+    border: none;
+    padding: 5px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 1em;
+    margin: 10px 2px;
+    cursor: pointer;
+    border-radius: 1rem;
+    font-weight: underline;
+    color: #060e0e;
+}
