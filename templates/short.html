@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>{{ short.title }} – StreamShorts</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=DM+Sans:wght@400;500;700&display=swap" rel="stylesheet"/>
+  <style>
+    /* ── Reset & Tokens ── */
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg:        #0a0a0f;
+      --surface:   #13131c;
+      --border:    #1e1e2e;
+      --accent:    #ff3c5f;
+      --accent2:   #ff8c42;
+      --text:      #f0f0f8;
+      --muted:     #7070a0;
+      --radius:    14px;
+      --nav-w:     64px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'DM Sans', sans-serif;
+      height: 100dvh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+    }
+
+    /* ── Animated background mesh ── */
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background:
+        radial-gradient(ellipse 60% 50% at 20% 30%, rgba(255,60,95,.07) 0%, transparent 70%),
+        radial-gradient(ellipse 50% 60% at 80% 70%, rgba(255,140,66,.05) 0%, transparent 70%);
+      pointer-events: none;
+    }
+
+    /* ── Layout ── */
+    .stage {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      height: 100dvh;
+      width: 100%;
+      max-width: 520px;
+      padding: 0 12px;
+    }
+
+    /* ── Nav Arrows ── */
+    .nav-btn {
+      flex-shrink: 0;
+      width: var(--nav-w);
+      height: var(--nav-w);
+      border-radius: 50%;
+      border: 2px solid var(--border);
+      background: var(--surface);
+      color: var(--text);
+      font-size: 22px;
+      cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      text-decoration: none;
+      transition: background .2s, border-color .2s, transform .15s;
+      user-select: none;
+    }
+    .nav-btn:hover:not(.disabled) {
+      background: var(--accent);
+      border-color: var(--accent);
+      transform: scale(1.08);
+    }
+    .nav-btn.disabled {
+      opacity: .25;
+      cursor: default;
+      pointer-events: none;
+    }
+
+    /* ── Card ── */
+    .card {
+      flex: 1;
+      height: min(92dvh, 680px);
+      border-radius: 24px;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+      position: relative;
+      animation: slideIn .35s cubic-bezier(.22,1,.36,1) both;
+    }
+    @keyframes slideIn {
+      from { opacity: 0; transform: translateY(24px) scale(.97); }
+      to   { opacity: 1; transform: none; }
+    }
+
+    /* ── Video ── */
+    .video-wrap {
+      position: relative;
+      flex: 1;
+      background: #000;
+      overflow: hidden;
+    }
+    video {
+      width: 100%; height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    /* gradient overlay */
+    .video-wrap::after {
+      content: '';
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(0,0,0,.85) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    /* ── Overlay info ── */
+    .overlay {
+      position: absolute; bottom: 0; left: 0; right: 0;
+      padding: 20px 18px 14px;
+      z-index: 2;
+    }
+    .author {
+      font-size: .8rem;
+      font-weight: 700;
+      color: var(--accent);
+      letter-spacing: .06em;
+      text-transform: uppercase;
+      margin-bottom: 4px;
+    }
+    .short-title {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.6rem;
+      line-height: 1.1;
+      letter-spacing: .02em;
+      margin-bottom: 6px;
+    }
+    .description {
+      font-size: .8rem;
+      color: rgba(240,240,248,.75);
+      line-height: 1.4;
+    }
+
+    /* ── Side actions ── */
+    .actions {
+      position: absolute; right: 14px; bottom: 110px;
+      z-index: 3;
+      display: flex; flex-direction: column; gap: 16px;
+      align-items: center;
+    }
+    .action-btn {
+      display: flex; flex-direction: column; align-items: center; gap: 4px;
+      cursor: pointer; user-select: none;
+    }
+    .action-icon {
+      width: 44px; height: 44px;
+      border-radius: 50%;
+      background: rgba(255,255,255,.1);
+      backdrop-filter: blur(8px);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 18px;
+      transition: background .2s, transform .15s;
+    }
+    .action-btn:hover .action-icon { background: rgba(255,60,95,.5); transform: scale(1.12); }
+    .action-label {
+      font-size: .7rem;
+      color: rgba(255,255,255,.7);
+      font-weight: 500;
+    }
+
+    /* ── Footer bar ── */
+    .footer-bar {
+      padding: 10px 18px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-top: 1px solid var(--border);
+      background: var(--surface);
+    }
+    .progress-wrap {
+      flex: 1;
+      height: 3px;
+      background: var(--border);
+      border-radius: 99px;
+      overflow: hidden;
+      margin: 0 12px;
+    }
+    .progress-bar {
+      height: 100%;
+      background: linear-gradient(90deg, var(--accent), var(--accent2));
+      border-radius: 99px;
+      transition: width .4s ease;
+      width: 0%;
+    }
+    .counter {
+      font-size: .75rem;
+      color: var(--muted);
+      white-space: nowrap;
+      font-weight: 500;
+    }
+
+    /* ── Keyboard hint ── */
+    .hint {
+      position: fixed; bottom: 14px; left: 50%; transform: translateX(-50%);
+      font-size: .68rem;
+      color: var(--muted);
+      opacity: .5;
+      pointer-events: none;
+    }
+  </style>
+</head>
+<body>
+
+<div class="stage">
+
+  <!-- PREV BUTTON -->
+  {% if prev_id %}
+    <a href="{{ url_for('short', short_id=prev_id) }}" class="nav-btn" title="Vorheriger Short (←)">&#8593;</a>
+  {% else %}
+    <span class="nav-btn disabled">&#8593;</span>
+  {% endif %}
+
+  <!-- CARD -->
+  <div class="card">
+
+    <!-- VIDEO -->
+    <div class="video-wrap">
+      <video src="{{ short.video_url }}" autoplay loop muted playsinline></video>
+
+      <!-- Overlay text -->
+      <div class="overlay">
+        <div class="author">{{ short.author }}</div>
+        <div class="short-title">{{ short.title }}</div>
+        <div class="description">{{ short.description }}</div>
+      </div>
+
+      <!-- Side actions -->
+      <div class="actions">
+        <div class="action-btn">
+          <div class="action-icon">❤️</div>
+          <span class="action-label">{{ "{:,}".format(short.likes).replace(",", ".") }}</span>
+        </div>
+        <div class="action-btn">
+          <div class="action-icon">💬</div>
+          <span class="action-label">{{ short.comments }}</span>
+        </div>
+        <div class="action-btn">
+          <div class="action-icon">↗️</div>
+          <span class="action-label">Teilen</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- FOOTER -->
+    <div class="footer-bar">
+      <span class="counter">{{ current_index }}&thinsp;/&thinsp;{{ total }}</span>
+      <div class="progress-wrap">
+        <div class="progress-bar" style="width: {{ (current_index / total * 100) | round(1) }}%"></div>
+      </div>
+      <span class="counter">StreamShorts</span>
+    </div>
+
+  </div>
+
+  <!-- NEXT BUTTON -->
+  {% if next_id %}
+    <a href="{{ url_for('short', short_id=next_id) }}" class="nav-btn" title="Nächster Short (→)">&#8595;</a>
+  {% else %}
+    <span class="nav-btn disabled">&#8595;</span>
+  {% endif %}
+
+</div>
+
+<div class="hint">← → Pfeiltasten zum Navigieren</div>
+
+<!-- Keyboard navigation -->
+<script>
+  document.addEventListener('keydown', e => {
+    {% if prev_id %}
+    if (e.key === 'ArrowUp' || e.key === 'ArrowLeft')
+      window.location.href = "{{ url_for('short', short_id=prev_id) }}";
+    {% endif %}
+    {% if next_id %}
+    if (e.key === 'ArrowDown' || e.key === 'ArrowRight')
+      window.location.href = "{{ url_for('short', short_id=next_id) }}";
+    {% endif %}
+  });
+</script>
+</body>
+</html>
